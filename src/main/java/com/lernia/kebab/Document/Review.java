@@ -1,28 +1,28 @@
 package com.lernia.kebab.Document;
 
+import java.util.UUID;
+
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.mongodb.client.model.geojson.Point;
 
 @Document
 public class Review {
 
-  @Id
-  Long id;
+  @Transient
+  private UUID id = UUID.randomUUID();
   private String name;
+  private GeoJsonPoint location;
 
   public Review() {}
 
-  public Review(Long id, String name) {
-    this.id = id;
+  public Review(String name) {
     this.name = name;
   }
 
-  public Long getId() {
-    return id;
-  }
-  public void setId(Long id) {
-    this.id = id;
-  }
   public String getName() {
     return name;
   }
@@ -30,6 +30,21 @@ public class Review {
     this.name = name;
   }
 
-  
+  public UUID getId() {
+    return id;
+  }
+
+  public void setId(UUID id) {
+    this.id = id;
+  }
+
+  public GeoJsonPoint getLocation() {
+    return location;
+  }
+
+  public void setLocation(GeoJsonPoint location) {
+    this.location = location;
+  }
+
   
 }
