@@ -19,9 +19,14 @@ public class ReviewController {
     this.reviewRepository = reviewRepository;
   }
 
+  @GetMapping("/reviewssss")
+  public List<Review> getAllReviews2() {
+    return reviewRepository.findAll();
+  }
+
   @GetMapping("/reviews")
   public List<Review> getAllReviews() {
-    return reviewRepository.findAll();
+    return reviewRepository.findAllWithOnlyLocation();
   }
   
 }
