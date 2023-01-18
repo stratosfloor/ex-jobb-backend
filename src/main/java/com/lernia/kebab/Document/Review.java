@@ -12,6 +12,11 @@ public class Review{
   private Long id;
   private String name;
   private GeoJsonPoint location;
+  
+  // TODO:
+  // private String review;
+  // private String link;
+  // private List<String> media;
 
   public Review() {}
 
