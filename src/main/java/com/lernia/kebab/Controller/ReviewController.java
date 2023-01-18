@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +30,7 @@ public class ReviewController {
 
   @GetMapping("/reviews")
   public List<Review> getAllReviews() {
-    return reviewRepository.findAllWithOnlyLocation();
+    return reviewRepository.findAll();
   }
 
   @GetMapping("/reviews/{id}")
@@ -48,7 +49,13 @@ public class ReviewController {
   }
 
   @GetMapping("/locations/reviews")
-  public List<Review> getAllReviewsForLocation(@RequestBody GeoJsonPoint point)  {
-    return reviewRepository.findAllReviewsForLocation(point);
+  public List<Review> getAllReviewsForLocation(@RequestParam("lat") String latitud, @RequestParam("long") String longitud){
+    return reviewRepository.findAllReviewsForLocation(new GeoJsonPoint(Double.valueOf(latitud), Double.valueOf(longitud)));
+
   }
+  // Denna funkar, ska testa med query params också
+  // @GetMapping("/locations/reviews")
+  // public List<Review> getAllReviewsForLocation(@RequestBody GeoJsonPoint point)  {
+  //   return reviewRepository.findAllReviewsForLocation(point);
+  // }
 }
