@@ -52,8 +52,8 @@ public class ReviewController {
   }
 
   @GetMapping("/locations/reviews")
-  public List<Review> getAllReviewsForLocation(@RequestParam("lat") String latitud, @RequestParam("long") String longitud){
-    return reviewRepository.findAllReviewsForLocation(new GeoJsonPoint(Double.valueOf(latitud), Double.valueOf(longitud)));
+  public List<Review> getAllReviewsForLocation(@RequestParam("lat") Double latitud, @RequestParam("lng") Double longitud){
+    return reviewRepository.findAllReviewsForLocation(new GeoJsonPoint(latitud,longitud));
 
   }
   // Denna funkar, ska testa med query params också
