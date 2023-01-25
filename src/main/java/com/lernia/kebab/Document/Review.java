@@ -1,5 +1,7 @@
 package com.lernia.kebab.Document;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -14,9 +16,9 @@ public class Review{
   private GeoJsonPoint location;
   
   // TODO:
-  // private String review;
-  // private String link;
-  // private List<String> media;
+  private String review;
+  private String link;
+  private List<String> media;
 
   public Review() {}
 
@@ -45,6 +47,29 @@ public class Review{
 
   public void setId(Long id) {
     this.id = id;
+  }
+  public String getReview() {
+    return review;
+  }
+
+  public void setReview(String review) {
+    this.review = review;
+  }
+
+  public String getLink() {
+    return link;
+  }
+
+  public void setLink(String link) {
+    this.link = link;
+  }
+
+  public List<String> getMedia() {
+    return media;
+  }
+
+  public void setMedia(List<String> media) {
+    this.media = media;
   }
   
 }
