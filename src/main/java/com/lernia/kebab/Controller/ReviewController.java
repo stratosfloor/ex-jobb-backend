@@ -1,5 +1,6 @@
 package com.lernia.kebab.Controller;
 
+import java.net.URI;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -10,10 +11,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.lernia.kebab.Document.Review;
 import com.lernia.kebab.Repository.ReviewRepository;
@@ -58,4 +61,12 @@ public class ReviewController {
   // public List<Review> getAllReviewsForLocation(@RequestBody GeoJsonPoint point)  {
   //   return reviewRepository.findAllReviewsForLocation(point);
   // }
+  @PostMapping("/reviews")
+  public ResponseEntity<Review> addNewReview(@RequestBody Review review) {
+    Review newReview = reviewRepository.save(review);
+    URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newReview.getId()).toUri();
+    return ResponseEntity.created(location).body(newReview);
+  }
+  
+  
 }
